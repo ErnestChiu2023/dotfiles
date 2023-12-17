@@ -15,6 +15,6 @@ local opts = {}
 
 require("vim-options")
 require("mappings")
-require("lazy").setup("plugins")
+require("lazy").setup({ { import = "plugins" }, { import = "plugins.lsp" } })
 
 
