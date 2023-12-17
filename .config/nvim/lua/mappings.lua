@@ -1,4 +1,3 @@
-
 local map = vim.keymap.set
 local set = vim.opt
 local defaults = { noremap = true, silent = true }
@@ -7,7 +6,7 @@ local defaults = { noremap = true, silent = true }
 map({ "n", "x" }, ";", ":")
 
 -- Easy escape
-map('i', 'jk', '<Esc>', {})
+map("i", "jk", "<Esc>", {})
 
 -- Shortcut for faster save and quit
 map("n", "<leader>w", "<cmd>update<cr>", { silent = true, desc = "save buffer" })
@@ -28,6 +27,16 @@ map("x", ">", ">gv", defaults)
 
 -- Edit and reload nvim config file quickly
 map("n", "<leader>rev", "<cmd>tabnew $MYVIMRC <bar> tcd %:h<cr>", {
-  silent = true,
-  desc = "open init.lua",
+	silent = true,
+	desc = "open init.lua",
 })
+
+-- Center on page up/down
+map("n", "<C-u>", "<C-u>zz>", defaults)
+map("n", "<C-d>", "<C-d>zz>", defaults)
+
+-- move current line / block with Alt-j/k similar to vscode.
+map("n", "<A-j>", ":m .+1<cr>==")
+map("n", "<A-k>", ":m .-2<cr>==")
+map("x", "<A-j>", ":m '>+1<cr>gv=gv")
+map("x", "<A-k>", ":m '<-2<cr>gv=gv")
