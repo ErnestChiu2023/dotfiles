@@ -1,6 +1,0 @@
-
--- Lazy plugins
-return {
-
-}
-

@@ -9,13 +9,13 @@ map({ "n", "x" }, ";", ":")
 map("i", "jk", "<Esc>", {})
 
 -- Shortcut for faster save and quit
-map("n", "<leader>w", "<cmd>update<cr>", { silent = true, desc = "save buffer" })
+map("n", "<leader>w", "<cmd>update<cr>", { silent = true, desc = "Save buffer" })
 
 -- Saves the file if modified and quit
-map("n", "<leader>q", "<cmd>x<cr>", { silent = true, desc = "quit current window" })
+map("n", "<leader>q", "<cmd>x<cr>", { silent = true, desc = "Quit current window" })
 
 -- Quit all opened buffers
-map("n", "<leader>Q", "<cmd>qa!<cr>", { silent = true, desc = "quit nvim" })
+map("n", "<leader>Q", "<cmd>qa!<cr>", { silent = true, desc = "Quit nvim" })
 
 map({ "n", "x" }, "H", "^")
 map({ "n", "x" }, "L", "g_")
@@ -40,3 +40,12 @@ map("n", "<A-j>", ":m .+1<cr>==")
 map("n", "<A-k>", ":m .-2<cr>==")
 map("x", "<A-j>", ":m '>+1<cr>gv=gv")
 map("x", "<A-k>", ":m '<-2<cr>gv=gv")
+
+-- Switch windows
+map("n", "<C-h>", "<c-w>h")
+map("n", "<C-l>", "<C-W>l")
+map("n", "<C-k>", "<C-W>k")
+map("n", "<C-j>", "<C-W>j")
+
+-- clear highlighting
+map("n", "<leader>h", ":noh <cr>", { desc = "Clear highlighting" })
