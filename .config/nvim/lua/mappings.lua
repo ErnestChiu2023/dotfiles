@@ -48,4 +48,10 @@ map("n", "<C-k>", "<C-W>k")
 map("n", "<C-j>", "<C-W>j")
 
 -- clear highlighting
-map("n", "<leader>h", ":noh <cr>", { desc = "Clear highlighting" })
+map("n", "<leader>ch", ":noh <cr>", { desc = "Clear highlighting" })
+
+-- copy relative path
+map("n", "<leader>crp", ":Cppath <cr>", { desc = "Copy relative path" })
+
+-- do not clear register on paste
+map("x", "p", "P")

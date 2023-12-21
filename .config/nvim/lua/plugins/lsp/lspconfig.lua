@@ -80,6 +80,13 @@ return {
 		lspconfig["tsserver"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
+			init_options = {
+				preferences = {
+					-- other preferences....
+					importModuleSpecifierPreference = "non-relative",
+					importModuleSpecifierEnding = "minimal",
+				},
+			},
 		})
 
 		-- configure solagraph server with plugin

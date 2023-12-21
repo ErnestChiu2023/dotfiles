@@ -16,9 +16,22 @@ return {
 						["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 					},
 				},
+				file_ignore_patterns = {
+					"node_modules/.*",
+					"%.env",
+					"yarn.lock",
+					"package-lock.json",
+					"lazy-lock.json",
+					"init.sql",
+					"target/.*",
+					".git/.*",
+					"tmp/.*",
+					"storybook-static/.*",
+					"%.dockerignore",
+					"vendor/.*",
+				},
 			},
 		})
-
 		local builtin = require("telescope.builtin")
 		local keymap = vim.keymap -- for conciseness
 		keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
