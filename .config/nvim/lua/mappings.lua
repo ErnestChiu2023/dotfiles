@@ -13,6 +13,7 @@ map("n", "<leader>w", "<cmd>update<cr>", { silent = true, desc = "Save buffer" }
 
 -- Saves the file if modified and quit
 map("n", "<leader>q", "<cmd>x<cr>", { silent = true, desc = "Quit current window" })
+map("n", "<leader>tq", ":tabclose<cr>", { silent = true, desc = "Quit current tab" })
 
 -- Quit all opened buffers
 map("n", "<leader>Q", "<cmd>qa!<cr>", { silent = true, desc = "Quit nvim" })

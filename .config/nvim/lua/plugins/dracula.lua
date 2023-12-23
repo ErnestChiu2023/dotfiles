@@ -16,8 +16,11 @@ return {
 
 		vim.cmd([[:highlight DiffviewStatusAdded guifg=#50fa7b guibg=#425246]])
 		vim.cmd([[:highlight DiffviewStatusDeleted guifg=#ff5555 guibg=#5e4141]])
+		vim.cmd([[:highlight DiffviewStatusChange guifg=#ffb86c guibg=#66594a]])
 
 		vim.cmd([[:highlight DiffviewDiffAdd guifg=#50fa7b guibg=#425246]])
 		vim.cmd([[:highlight DiffviewDiffDelete guifg=#ff5555 guibg=#5e4141]])
+		vim.cmd([[:highlight DiffviewDiffChange guifg=#ffb86c guibg=#66594a]])
+		vim.cmd([[:highlight DiffviewDiffText guifg=#ff8f0d guibg=#66594a]])
 	end,
 }
