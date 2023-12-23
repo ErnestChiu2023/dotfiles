@@ -55,3 +55,6 @@ map("n", "<leader>crp", ":Cppath <cr>", { desc = "Copy relative path" })
 
 -- do not clear register on paste
 map("x", "p", "P")
+
+-- don't move cursor when triggering asterick
+map("n", "*", "*``")
