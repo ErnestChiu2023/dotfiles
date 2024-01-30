@@ -135,7 +135,14 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 alias udock="docker compose run --no-deps --rm web /bin/bash -c \"bundle && yarn\""
 
 # Restart docker containers
-alias rdock="docker-compose up --build --force-recreate -d"
+alias rdock="docker-compose up --build --force-recreate -d --scale scheduler=0 --scale worker=0"
+alias rdocka="docker-compose up --build --force-recreate -d"
+
+# run eslint
+alias es="p eslint --fix"
+
+# run tslint
+alias ts="yarn run tsc-strict"
 
 # resync mutagen
 alias msync="mutagen sync resume $(mutagen sync list|grep Identifier|sed -e 's/Identifier: //')"

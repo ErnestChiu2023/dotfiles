@@ -12,6 +12,8 @@ return {
 		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
+		local builtin = require("telescope.builtin")
+
 		local keymap = vim.keymap -- for conciseness
 
 		local opts = { noremap = true, silent = true }
@@ -26,7 +28,7 @@ return {
 			keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
 
 			opts.desc = "Show LSP definitions"
-			keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
+			keymap.set("n", "gd", "<cmd>Telescope lsp_definitions jump_type=vsplit reuse_win=true<CR>", opts) -- show lsp definitions
 
 			opts.desc = "Show LSP implementations"
 			keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
@@ -45,8 +47,6 @@ return {
 
 			opts.desc = "Show line diagnostics"
 			keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
-
-			opts.desc = "Go to previous diagnostic"
 			keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
 
 			opts.desc = "Go to next diagnostic"
@@ -70,10 +70,17 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
+		-- LSP settings (for overriding per client)
+		local handlers = {
+			["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+			["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+		}
+
 		-- configure html server
 		lspconfig["html"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
+			handlers = handlers,
 		})
 
 		-- configure typescript server with plugin
@@ -87,22 +94,42 @@ return {
 					importModuleSpecifierEnding = "minimal",
 				},
 			},
+			handlers = handlers,
 		})
 
-		-- configure solagraph server with plugin
-		lspconfig["solargraph"].setup({
+		-- configure ruby_lsp server with plugin
+		lspconfig["ruby_ls"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
+			handlers = handlers,
+			cmd = { "bundle", "exec", "ruby-lsp" },
+			filetypes = {
+				"ruby",
+			},
+			init_options = {
+				formatter = "auto",
+				-- enabledFeatures = {
+				-- 	"documentHighlights",
+				-- 	"documentSymbols",
+				-- 	"foldingRanges",
+				-- 	"selectionRanges",
+				-- 	-- "semanticHighlighting",
+				-- 	"formatting",
+				-- 	"codeActions",
+				-- },
+			},
 		})
 
 		-- configure css server
 		lspconfig["cssls"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
+			handlers = handlers,
 		})
 		-- configure svelte server
 		lspconfig["svelte"].setup({
 			capabilities = capabilities,
+			handlers = handlers,
 			on_attach = function(client, bufnr)
 				on_attach(client, bufnr)
 
@@ -122,12 +149,14 @@ return {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+			handlers = handlers,
 		})
 
 		-- configure lua server (with special settings)
 		lspconfig["lua_ls"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
+			handlers = handlers,
 			settings = { -- custom settings for lua
 				Lua = {
 					-- make the language server recognize "vim" global

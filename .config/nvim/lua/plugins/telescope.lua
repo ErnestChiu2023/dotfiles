@@ -40,5 +40,6 @@ return {
 		keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find help tags" })
 		keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Find keymaps" })
 		keymap.set("n", "<leader>fc", builtin.commands, { desc = "Find commands" })
+		keymap.set("n", "<leader>fr", builtin.resume, { desc = "Resume last find" })
 	end,
 }

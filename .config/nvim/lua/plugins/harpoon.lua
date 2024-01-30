@@ -4,12 +4,24 @@ return {
 	requires = { { "nvim-lua/plenary.nvim" } },
 	config = function()
 		local harpoon = require("harpoon")
-		harpoon:setup()
+		function get_git_branch()
+			local branch = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
+			return branch ~= "" and branch or ""
+		end
+		harpoon:setup({
+			settings = {
+				save_on_toggle = false,
+				save_on_ui_close = false,
+				key = function()
+					return vim.loop.cwd() .. get_git_branch()
+				end,
+			},
+		})
 
 		vim.keymap.set("n", "<leader>a", function()
 			harpoon:list():append()
 			local path = vim.fn.expand("%")
-			vim.notify('Added "' .. path .. '" to harpoon in position')
+			vim.notify('Added "' .. path .. '" to harpoon')
 		end, { desc = "append file to harpoon list" })
 
 		vim.keymap.set("n", "<leader>j", function()
@@ -26,5 +38,13 @@ return {
 				harpoon:list():select(i)
 			end, { desc = "harpoon option " .. i })
 		end
+
+		harpoon:extend({
+			UI_CREATE = function(cx)
+				vim.keymap.set("n", "<C-v>", function()
+					harpoon.ui:select_menu_item({ vsplit = true })
+				end, { buffer = cx.bufnr })
+			end,
+		})
 	end,
 }

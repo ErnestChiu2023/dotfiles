@@ -9,5 +9,13 @@ return {
 	-- 	"DiffviewRefresh",
 	-- 	"DiffviewFileHistory",
 	-- },
-	keys = { { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diffview Open" } },
+	keys = {
+		{ "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diffview Open" },
+		{ "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", desc = "Diffview Filehistory Open" },
+	},
+	config = function()
+		require("diffview").setup({
+			file_panel = { win_config = { height = 10, position = "bottom" } },
+		})
+	end,
 }
