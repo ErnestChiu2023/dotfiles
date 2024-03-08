@@ -4,11 +4,11 @@ return {
 		require("neoscroll").setup({})
 		local t = {}
 		-- Syntax: t[keys] = {function, {function arguments}}
-		t["<C-i>"] = { "scroll", { "-vim.wo.scroll", "true", "150" } }
-		t["<C-u>"] = { "scroll", { "vim.wo.scroll", "true", "150" } }
-		t["zt"] = { "zt", { "250" } }
-		t["zz"] = { "zz", { "250" } }
-		t["zb"] = { "zb", { "250" } }
+		t["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "50" } }
+		t["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "50" } }
+		t["zt"] = { "zt", { "50" } }
+		t["zz"] = { "zz", { "50" } }
+		t["zb"] = { "zb", { "50" } }
 
 		require("neoscroll.config").set_mappings(t)
 	end,

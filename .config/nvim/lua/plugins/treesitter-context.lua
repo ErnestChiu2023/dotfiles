@@ -1,7 +1,8 @@
 return {
 	"nvim-treesitter/nvim-treesitter-context",
 	config = function()
-		require("treesitter-context").setup({
+		local sitter = require("treesitter-context")
+		sitter.setup({
 			enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
 			max_lines = 1, -- How many lines the window should span. Values <= 0 mean no limit.
 			min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
@@ -15,5 +16,9 @@ return {
 			zindex = 20, -- The Z-index of the context window
 			on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 		})
+
+		vim.keymap.set("n", "gC", function()
+			sitter.go_to_context(vim.v.count1)
+		end, { silent = true })
 	end,
 }

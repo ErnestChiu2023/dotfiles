@@ -33,7 +33,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
 # zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+# zstyle ':omz:update' mode reminder  # ust remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
 # zstyle ':omz:update' frequency 13
@@ -106,17 +106,25 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias dotfiles='/usr/bin/git --git-dir=/Users/ernestchiu/.dotfiles/ --work-tree=/Users/ernestchiu'
+# alias dotfiles='/usr/bin/git --git-dir=/Users/ernestchiu/.dotfiles/ --work-tree=/Users/ernestchiu'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 
+#  Enable key repeat
+# -------------------------
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+# speed up past what system preferences allows
+defaults write -g KeyRepeat -int 1
 
+. /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
+
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 . /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
 
@@ -126,10 +134,10 @@ export NVM_DIR="$HOME/.nvm"
 
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
-. /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
-
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+# add ssh key for github
+ssh-add --apple-use-keychain ~/.ssh/id_rsa 2> /dev/null
 
 # Updates docker images
 alias udock="docker compose run --no-deps --rm web /bin/bash -c \"bundle && yarn\""
@@ -137,6 +145,9 @@ alias udock="docker compose run --no-deps --rm web /bin/bash -c \"bundle && yarn
 # Restart docker containers
 alias rdock="docker-compose up --build --force-recreate -d --scale scheduler=0 --scale worker=0"
 alias rdocka="docker-compose up --build --force-recreate -d"
+
+# Lazy docker alias
+alias lzd='lazydocker'
 
 # run eslint
 alias es="p eslint --fix"
@@ -147,16 +158,31 @@ alias ts="yarn run tsc-strict"
 # resync mutagen
 alias msync="mutagen sync resume $(mutagen sync list|grep Identifier|sed -e 's/Identifier: //')"
 
+# better ls
+alias ls="eza"
+
+# zoxide better cd
+eval "$(zoxide init zsh)"
+alias cd="z"
+alias cdi="zi"
+
+# clear terminal
+alias c="clear"
+
+#  CLI management
+# -------------------------
+alias reload="exec zsh"
+alias r="reload"
+
 # Git Aliases 
-#alias gch="git checkout"
-alias gb="git branch"
 alias gs="git status"
 alias gpm="git pull origin master"
 alias grm="git rebase master"
 alias gp="git push"
 alias ga="git commit --amend --no-edit"
-alias gc="p commit"
-
+alias gc="git commit"
+alias gb="git --no-pager branch -vv"
+alias gch--="git checkout -- ."
 #  fzf
 # -------------------------
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -165,7 +191,7 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden'
 # NOTE: Not recommended to add --preview to FZF default options
 export FZF_DEFAULT_OPTS='--inline-info --multi --reverse'
 
-function gcb() { git checkout -b $USER/"$@"; } # make new branch with just ticket name -- eg. 'gcb ORION-699'
+function gcb() { git checkout -b $USER/"$@"; } # make new branch with ust ticket name -- eg. 'gcb ORION-699'
 
 # FZF git branch
 function _gbr() {
@@ -179,26 +205,40 @@ function gch() {
   branch=$(_gbr "$1")
   [[ ! -z "$branch" ]] && git checkout "$branch"
 }
+unalias gbd
 # Delete the selected branch
 function gbd() {
   local branch
   branch=$(_gbr "$1")
   [[ ! -z "$branch" ]] && git branch -D "$branch"
 }
+unalias gd
 # Diff the selected branch against the current branch
 function gd() {
   local branch
   branch=$(_gbr "$1")
   [[ ! -z "$branch" ]] && git diff "$branch"...
 }
+# display the files changed between the selected branch and the current branch
 function changed() {
   local branch
   branch=$(_gbr "$1")
   [[ ! -z "$branch" ]] && git --no-pager diff --name-only "$branch"...
 }
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
-ssh-add --apple-use-keychain ~/.ssh/id_rsa 2> /dev/null
 
 # Sets up config alias for us to use git in config file
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+# ========================
+#  fzf
+# ========================
+#
+# https://github.com/junegunn/fzf/wiki/Examples
+# 
+# e -- edit
+# e [FUZZY PATTERN] - Open the selected file with the default editor
+function e() {
+  IFS=$'\n' files=($(fzf --exit-0 --select-1 --query="$1" --multi --ansi --preview="bat --style=numbers --color=always --line-range=:100 {1}"))
+  [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
+}

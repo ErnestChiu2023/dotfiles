@@ -30,8 +30,8 @@ map("n", "<leader>rev", "<cmd>tabnew $MYVIMRC <bar> tcd %:h<cr>", {
 })
 
 -- Center on page up/down
--- map("n", "<C-u>", "<C-u>zz>", defaults)
--- map("n", "<C-d>", "<C-d>zz>", defaults)
+-- map("n", "<C-i>", "<C-u>zz>", defaults)
+-- map("n", "<C-u>", "<C-d>zz>", defaults)
 -- map("n", "<S-h>", "<C-u>zz>", defaults)
 -- map("n", "<S-l>", "<C-d>zz>", defaults)
 
