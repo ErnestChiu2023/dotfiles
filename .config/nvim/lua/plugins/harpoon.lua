@@ -24,7 +24,7 @@ return {
 			vim.notify('Added "' .. path .. '" to harpoon')
 		end, { desc = "append file to harpoon list" })
 
-		vim.keymap.set("n", "<leader>j", function()
+		vim.keymap.set("n", "<leader>cl", function()
 			harpoon:list():clear()
 			vim.notify("Cleared harpoon list")
 		end, { desc = "clear harpoon list" })
@@ -38,6 +38,14 @@ return {
 				harpoon:list():select(i)
 			end, { desc = "harpoon option " .. i })
 		end
+
+		-- Toggle previous & next buffers stored within Harpoon list
+		vim.keymap.set("n", "<leader>j", function()
+			harpoon:list():prev({ ui_nav_wrap = true })
+		end)
+		vim.keymap.set("n", "<leader>k", function()
+			harpoon:list():next({ ui_nav_wrap = true })
+		end)
 
 		harpoon:extend({
 			UI_CREATE = function(cx)

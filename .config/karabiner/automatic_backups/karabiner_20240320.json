@@ -18,6 +18,29 @@
                 },
                 "rules": [
                     {
+                        "description": "If right command and space bar is pressed together, trigger sticky shift",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_command"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "sticky_modifier": {
+                                            "left_shift": "toggle"
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "If left shift and space bar is pressed together, trigger left command",
                         "manipulators": [
                             {

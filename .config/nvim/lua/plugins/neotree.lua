@@ -14,6 +14,7 @@ return {
 
 		local neotree = require("neo-tree")
 		neotree.setup({
+			rememberBuffers = false,
 			filesystem = {
 				follow_current_file = {
 					enabled = true, -- This will find and focus the file in the active buffer every time

@@ -42,5 +42,6 @@ return {
 		keymap.set("n", "<leader>fc", builtin.commands, { desc = "Find commands" })
 		keymap.set("n", "<leader>fr", builtin.resume, { desc = "Resume last find" })
 		keymap.set("n", "<leader>fs", builtin.treesitter, { desc = "Find symbols" })
+		keymap.set("n", "<leader>f/", builtin.current_buffer_fuzzy_find, { desc = "Find current buffer fuzzy find" })
 	end,
 }

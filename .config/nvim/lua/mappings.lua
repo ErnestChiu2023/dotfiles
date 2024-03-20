@@ -4,6 +4,7 @@ local defaults = { noremap = true, silent = true }
 
 -- Save key strokes (now we do not need to press shift to enter command mode).
 map({ "n", "x" }, ";", ":")
+map({ "n", "x" }, "C-;", ";")
 
 -- Easy escape
 map("i", "jk", "<Esc>", {})
@@ -30,8 +31,8 @@ map("n", "<leader>rev", "<cmd>tabnew $MYVIMRC <bar> tcd %:h<cr>", {
 })
 
 -- Center on page up/down
--- map("n", "<C-i>", "<C-u>zz>", defaults)
--- map("n", "<C-u>", "<C-d>zz>", defaults)
+map("n", "<C-k>", "<C-u>zz", defaults)
+map("n", "<C-j>", "<C-d>zz", defaults)
 -- map("n", "<S-h>", "<C-u>zz>", defaults)
 -- map("n", "<S-l>", "<C-d>zz>", defaults)
 
@@ -42,10 +43,8 @@ map("x", "<A-j>", ":m '>+1<cr>gv=gv")
 map("x", "<A-k>", ":m '<-2<cr>gv=gv")
 
 -- Switch windows
-map("n", "<C-h>", "<c-w>h")
+map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-W>l")
-map("n", "<C-k>", "<C-W>k")
-map("n", "<C-j>", "<C-W>j")
 
 -- clear highlighting
 map("n", "<leader>ch", ":noh <cr>", { desc = "Clear highlighting" })
@@ -65,3 +64,7 @@ map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+
+-- reposition after search query
+map("n", "n", "nzz")
+map("n", "N", "Nzz")

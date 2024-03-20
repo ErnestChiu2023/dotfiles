@@ -18,7 +18,34 @@
                 },
                 "rules": [
                     {
-                        "description": "If left shift and space bar is pressed together, trigger left command",
+                        "description": "Change tab to left_control. (Post tab if pressed alone)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "tab",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_control"
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "tab",
+                                        "lazy": true
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "If left shift and space bar is pressed together, trigger left_command + left_shift",
                         "manipulators": [
                             {
                                 "from": {
@@ -31,7 +58,10 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "left_command"
+                                        "key_code": "left_shift",
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -39,7 +69,7 @@
                         ]
                     },
                     {
-                        "description": "If left control and space bar is pressed together, trigger left_command",
+                        "description": "If left control and space bar is pressed together, trigger left_command + left_control",
                         "manipulators": [
                             {
                                 "from": {
@@ -52,7 +82,10 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "left_command"
+                                        "key_code": "left_control",
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -339,17 +372,7 @@
                     },
                     "to": [
                         {
-                            "key_code": "tab"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "tab"
-                    },
-                    "to": [
-                        {
-                            "key_code": "left_control"
+                            "key_code": "vk_none"
                         }
                     ]
                 }
