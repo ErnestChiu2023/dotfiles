@@ -43,5 +43,6 @@ return {
 		keymap.set("n", "<leader>fr", builtin.resume, { desc = "Resume last find" })
 		keymap.set("n", "<leader>fs", builtin.treesitter, { desc = "Find symbols" })
 		keymap.set("n", "<leader>f/", builtin.current_buffer_fuzzy_find, { desc = "Find current buffer fuzzy find" })
+		keymap.set("n", "<leader>fp", builtin.git_status, { desc = "Find git status" })
 	end,
 }
