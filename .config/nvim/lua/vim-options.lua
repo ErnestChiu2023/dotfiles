@@ -22,7 +22,7 @@ keymap("i", "jk", "<Esc>", {})
 -- copy relative path with line number
 vim.api.nvim_create_user_command("Cppathwithline", function()
 	local line = vim.fn.line(".")
-	local path = vim.fn.expand("%")
+	local path = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
 	local path_and_line = path .. ":" .. line
 	vim.fn.setreg("+", path_and_line)
 	vim.notify('Copied "' .. path_and_line .. '" to the clipboard!')
@@ -30,7 +30,7 @@ end, {})
 
 -- copy relative path
 vim.api.nvim_create_user_command("Cppath", function()
-	local path = vim.fn.expand("%")
+	local path = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
 	vim.fn.setreg("+", path)
 	vim.notify('Copied "' .. path .. '" to the clipboard!')
 end, {})
@@ -42,13 +42,11 @@ vim.opt.signcolumn = "yes"
 
 -- round borders for diagnostics
 vim.diagnostic.config({
-	virtual_text = {
-		source = "always", -- Or "if_many"
-	},
+	virtual_text = false,
 	float = {
 		source = "always", -- Or "if_many"
 		border = "rounded",
 	},
 })
-
+vim.loader.enable()
 vim.opt.splitright = true -- Put new windows right of current

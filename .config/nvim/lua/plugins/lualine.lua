@@ -51,7 +51,7 @@ return {
 
 		require("lualine").setup({
 			options = {
-				theme = "everforest",
+				theme = "kanagawa",
 				component_separators = "",
 				section_separators = { left = "", right = "" },
 			},
@@ -93,7 +93,7 @@ return {
 						end,
 					},
 				},
-				lualine_c = {},
+				lualine_c = { "harpoon2" },
 				lualine_x = {},
 				lualine_y = { search_result, "filetype" },
 				lualine_z = { "%l:%c", "%p%%/%L" },

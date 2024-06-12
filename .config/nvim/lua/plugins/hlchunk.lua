@@ -1,0 +1,45 @@
+return {
+	-- "shellRaining/hlchunk.nvim",
+	-- event = { "UIEnter" },
+	-- config = function()
+	-- 	local color = "#74ad82"
+	--
+	-- 	local supported_filetypes = {
+	-- 		"*.lua",
+	-- 		"*.tsx",
+	-- 		"*.yaml",
+	-- 		"*.yml",
+	-- 	}
+	-- 	require("hlchunk").setup({
+	-- 		chunk = {
+	-- 			enable = true,
+	-- 			use_treesitter = true,
+	-- 			chars = {
+	-- 				horizontal_line = "─",
+	-- 				vertical_line = "│",
+	-- 				left_top = "╭",
+	-- 				left_bottom = "╰",
+	-- 				right_arrow = "─",
+	-- 			},
+	-- 			style = {
+	-- 				{ fg = color },
+	-- 				{ fg = "#c21f30" }, -- this fg is used to highlight wrong chunk
+	-- 			},
+	-- 			support_filetypes = supported_filetypes,
+	-- 		},
+	-- 		blank = {
+	-- 			enable = false,
+	-- 		},
+	-- 		-- context = {
+	-- 		-- 	style = { color },
+	-- 		-- 	enable = true,
+	-- 		-- },
+	-- 		line_num = {
+	-- 			style = { color },
+	-- 			enable = true,
+	-- 			use_treesitter = true,
+	-- 			support_filetypes = supported_filetypes,
+	-- 		},
+	-- 	})
+	-- end,
+}

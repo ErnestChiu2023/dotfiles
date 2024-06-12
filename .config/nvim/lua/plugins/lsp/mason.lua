@@ -30,11 +30,8 @@ return {
 				"tsserver",
 				"html",
 				"cssls",
-				"svelte",
 				"lua_ls",
-				"emmet_ls",
-				"pyright",
-				"ruby_ls",
+				"ruby_lsp@0.16.6",
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true, -- not the same as ensure_installed

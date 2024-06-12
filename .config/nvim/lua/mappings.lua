@@ -45,6 +45,8 @@ map("x", "<A-k>", ":m '<-2<cr>gv=gv")
 -- Switch windows
 map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-W>l")
+map("n", "<C-u>", "<C-w>k")
+map("n", "<C-d>", "<C-W>j")
 
 -- clear highlighting
 map("n", "<leader>ch", ":noh <cr>", { desc = "Clear highlighting" })
@@ -68,3 +70,9 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window w
 -- reposition after search query
 map("n", "n", "nzz")
 map("n", "N", "Nzz")
+
+-- remap replay last macro
+map("n", ",", "@@")
+
+-- open vertical quickfix list
+map("n", "<leader>fl", "<cmd>:vertical copen<cr>", { desc = "open quickfix list " })
