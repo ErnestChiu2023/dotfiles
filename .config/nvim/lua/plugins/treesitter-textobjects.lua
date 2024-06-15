@@ -1,7 +1,5 @@
 return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
-	lazy = false,
-	enabled = true,
 	dependencies = { "nvim-treesitter/nvim-treesitter" },
 	config = function()
 		local config = require("nvim-treesitter.configs")

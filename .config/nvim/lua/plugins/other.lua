@@ -1,5 +1,6 @@
 return {
 	"rgroli/other.nvim",
+	event = "VeryLazy",
 	config = function()
 		vim.keymap.set("n", "<leader>o", "<Cmd>Other<CR>", {
 			silent = true,

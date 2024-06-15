@@ -1,7 +1,7 @@
 return {
 	"mfussenegger/nvim-lint",
-	lazy = true,
 	event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
+	enabled = false,
 	config = function()
 		local lint = require("lint")
 
@@ -10,7 +10,6 @@ return {
 			typescript = { "eslint_d" },
 			javascriptreact = { "eslint_d" },
 			typescriptreact = { "eslint_d" },
-			svelte = { "eslint_d" },
 			ruby = { "rubocop" },
 		}
 
