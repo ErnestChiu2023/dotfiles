@@ -12,6 +12,9 @@ map({ "n", "x" }, "C-;", ";")
 -- Easy escape
 map("i", "jk", "<Esc>", {})
 
+-- force quit all
+map("n", "<leader>qa", "<cmd>qa!<cr>", { desc = "Force Quit All" })
+
 -- Center on page up/down
 map("n", "<C-k>", "<C-u>zz", defaults)
 map("n", "<C-j>", "<C-d>zz", defaults)

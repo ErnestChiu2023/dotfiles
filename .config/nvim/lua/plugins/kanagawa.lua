@@ -26,9 +26,6 @@ return {
         },
       },
       overrides = function(colors) -- add/modify highlights
-        local theme = colors.theme
-        local palette = colors.palette
-
         return {
           FloatBorder = { bg = "none" },
           NormalFloat = { bg = "none" },
