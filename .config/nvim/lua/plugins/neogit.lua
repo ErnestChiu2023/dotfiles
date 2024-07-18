@@ -8,7 +8,6 @@ return {
     "nvim-telescope/telescope.nvim",
   },
   cmd = "Neogit",
-  branch = "nightly",
   keys = { { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit" } },
   config = function()
     local neogit = require("neogit")

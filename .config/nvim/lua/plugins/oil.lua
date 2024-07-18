@@ -10,6 +10,7 @@ return {
         ["<CR>"] = "actions.select",
         ["<C-v>"] = "actions.select_vsplit",
         ["<C-h>"] = false,
+        ["<C-s>"] = false,
         ["<C-t>"] = "actions.select_tab",
         ["<C-p>"] = "actions.preview",
         ["<C-c>"] = "actions.close",

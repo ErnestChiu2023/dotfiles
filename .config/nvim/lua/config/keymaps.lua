@@ -28,6 +28,7 @@ map("x", "p", "P")
 
 -- don't move cursor when triggering asterick
 map("n", "*", "*``")
+map("n", ",", "@@")
 
 -- unmap lazygit commands
 unmap("n", "<leader>gg")
