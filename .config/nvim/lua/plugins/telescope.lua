@@ -8,6 +8,13 @@ return {
         function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
         desc = "Find Plugin File",
       },
+    {
+      "<leader><leader>",
+      function()
+        require("telescope").extensions.smart_open.smart_open()
+      end,
+      desc = "Smart Find",
+    },
   },
   -- change some options
   opts = function(_, opts)
